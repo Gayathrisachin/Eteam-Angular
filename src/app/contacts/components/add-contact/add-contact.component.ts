@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Contact } from '../../model/contact';
+import { ContactService } from '../../services/contact.service';
 
 @Component({
   selector: 'app-add-contact',
@@ -10,8 +12,9 @@ import { Router } from '@angular/router';
 })
 export class AddContactComponent implements OnInit {
   //  Step 1: Create HTML tag equivalent in ts
-addContactForm: FormGroup;
-  constructor(private router: Router) { }
+  addContactForm: FormGroup;
+  isSaved = false;
+  constructor(private router: Router, private contactService: ContactService) { }
 
   ngOnInit(): void {
     // Step 1:Continues
@@ -24,12 +27,20 @@ addContactForm: FormGroup;
     });
   }
 
-  onClick(): void{
-  this.router.navigate(['/contacts']);
+  onClick(): void {
+    this.router.navigate(['/contacts']);
   }
 
-  addContactHandler(): void{
-    alert('submitted');
+  async addContactHandler(): Promise<void> {
     console.log(this.addContactForm.value);
+
+    // 2. send the above data to the service
+    const status: Contact = await this.contactService.createContact(this.addContactForm.value);
+    console.log(status);
+    if (status && status.id) {
+      this.isSaved = true;
+    }
+
   }
+
 }

@@ -22,7 +22,7 @@ const routes: Routes = [
     path: 'contacts/add', component: AddContactComponent
   },
   {
-    path: 'contacts/contact-details/id', component: ContactDetailsComponent
+    path: 'contacts/:id', component: ContactDetailsComponent
   },
   {
     path: 'about', component: AboutComponent
