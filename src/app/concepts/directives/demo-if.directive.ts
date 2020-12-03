@@ -5,16 +5,19 @@ import { Directive, TemplateRef, ViewContainerRef } from '@angular/core';
 })
 export class DemoIfDirective {
 
-  constructor(private viewContainerRef: ViewContainerRef, private temlateRef: TemplateRef<object>) {
-    console.log(this.viewContainerRef);
+  constructor( private viewContainerRef: ViewContainerRef, private templateRef: TemplateRef<object> ) {
+    console.log(this.viewContainerRef); // div
+    console.log(this.templateRef); // p
 
-    const isAuth = false;
-    // if true the para would be inside the div
+    const isAuth = true;
+
     if (isAuth){
-      this.viewContainerRef.createEmbeddedView(this.temlateRef);
+      // if true -- the para would be inside the div
+      this.viewContainerRef.createEmbeddedView(this.templateRef);
     }else{
+      // if not true - the div would not have anything inside
       this.viewContainerRef.clear();
     }
-   }
+  }
 
 }

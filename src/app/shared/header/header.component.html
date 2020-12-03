@@ -7,14 +7,18 @@
   
     <div class="collapse navbar-collapse" id="navbarsExampleDefault">
       <app-menu>
-        <li class="nav-item header">
-          <a class="nav-link" href="#">Login</a>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/login">Login</a>
         </li>
-        <li class="nav-item header">
-          <a class="nav-link" href="#">Sign Up</a>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/signup">Signup</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="">Logout</a>
         </li>
       </app-menu>
-     
+      <button type="button" class="btn btn-primary" style="margin-left: 20px" 
+      (click)="gotoCartHandler()">Cart ({{cartItemCount}})</button>
     </div>
   </nav>
 </header>

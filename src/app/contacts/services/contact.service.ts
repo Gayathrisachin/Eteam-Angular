@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
-import { Contact } from '../model/contact';
+import { Contact } from '../models/contact';
 import { Observable } from 'rxjs';
 
 // Decorator
@@ -18,28 +18,24 @@ export class ContactService {
   createContact(contactFormData: Contact): Promise<Contact> | Promise<any> { // 1. get the data from the comp ts
     console.log(contactFormData);
 
-    // 2. send the data to the rest api backend
-    // 2.1. what's the rest api url? - http://jsonplaceholder.typicode.com/users
-    // 2.2. what's the http method? - POST
-    // 2.3. What's the tool we have to use to sent the above data? - HttpClient
-
-    const createContactPromise = new Promise((resolve, reject) => {
+    const createContactPromise = new Promise( (resolve, reject) => {
       this.http.post(this.REST_API_URL, contactFormData)
-      .toPromise()
-      .then((res: Contact) => {
-        console.log(res);
-        resolve(res);
-      })
-      .catch((err: any) => { // 3. get the resp from the rest api backend
-        console.log(err);
-        reject(err) ; // 4. send it back to the comp ts
-      })
-      .finally (() => {
-        console.log('It is over');
-      });
+        .toPromise()
+        .then((res: Contact) => {
+          console.log(res);
+          resolve(res);
+        })
+        .catch((err: any) => {
+          console.log(err);
+          reject(err);
+        })
+        .finally(() => {
+          console.log('It is over!');
+        });
     });
     return createContactPromise as Promise<Contact> | Promise<any>;
   }
+
   // Listing all contacts
   getContacts(): Observable<Contact[]> { // 1. get the req from comp.ts
     console.log('Inside service');
